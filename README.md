@@ -10,7 +10,13 @@ Jogo individual com as 16 palavras da atividade, feito em HTML, CSS e JavaScript
 ## Como jogar
 Clique em uma pista ou casa e digite. Cada casa recebe uma letra; os cruzamentos compartilham a mesma casa. As setas navegam, Backspace apaga, Enter alterna a direção no cruzamento. Também é possível colar uma palavra a partir da casa selecionada.
 
-Conferir mostra o resultado de cada palavra nas pistas: correta, incorreta ou incompleta. O contador registra palavras inteiramente corretas. Depois da primeira conferência, edições atualizam o resultado. Uma casa compartilhada só fica verde quando todas as palavras que passam nela estão corretas; confira os símbolos nas pistas para o resultado individual.
+Conferir mostra o resultado de cada palavra nas pistas: correta, incorreta ou incompleta. O contador registra palavras inteiramente corretas. Depois da primeira conferência, edições atualizam o resultado. As cores de cada casa consideram todas as palavras que passam por ela:
+
+- **Verde:** todas estão corretas.
+- **Vermelho:** todas estão erradas (completas, mas incorretas).
+- **Neutro:** qualquer outro caso, incluindo palavras incompletas ou resultados mistos.
+
+Confira os símbolos nas pistas para o resultado individual. Os destaques de navegação são preservados: casas neutras selecionadas ficam azuis; casas verdes ou vermelhas selecionadas mantêm o marcador azul inferior. A casa em foco fica amarela com contorno rosa, com prioridade sobre a cor da avaliação. Ao sair do foco, volta a exibir a cor correspondente ao resultado e à seleção.
 
 Reiniciar pede confirmação e limpa todas as respostas. O progresso não é salvo ao fechar ou recarregar a página. No celular, deslize o tabuleiro horizontalmente quando necessário.
 

@@ -107,7 +107,8 @@ function invalidate() {
   if (checked) evaluate(false);
 }
 // A avaliação é por palavra. Nos cruzamentos, a casa fica verde apenas se
-// todas as palavras que passam por ela estiverem corretas; a pista detalha cada resultado.
+// todas as palavras estiverem corretas e vermelha apenas se todas estiverem
+// erradas. Nos demais casos, fica neutra; a pista detalha cada resultado.
 function evaluate(announce = true) {
   checked = true;
   const states = new Map(); let correct = 0; let incomplete = 0;
@@ -124,7 +125,7 @@ function evaluate(announce = true) {
   for (const [pos, input] of cells) {
     const statuses = memberships.get(pos).map(w => states.get(w));
     input.parentElement.classList.toggle('correct', statuses.every(s => s === 'correct'));
-    input.parentElement.classList.toggle('wrong', statuses.includes('wrong'));
+    input.parentElement.classList.toggle('wrong', statuses.every(s => s === 'wrong'));
   }
   document.querySelector('#score').textContent = correct;
   document.querySelector('#progress').value = correct;
