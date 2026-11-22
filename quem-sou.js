@@ -78,10 +78,13 @@
     $('#who-feedback').textContent = `${correct ? `✓ Acertou! +${earned} pontos.` : choice === null ? 'Rodada pulada. +0 pontos.' : '× Não foi dessa vez. +0 pontos.'} ${display(word.answer)}: ${word.clue}`;
     $('#who-next').hidden = false;
     $('#who-next').textContent = index === rounds.length - 1 ? 'Ver resultado →' : 'Próxima rodada →';
+    $('#who-next').focus({preventScroll: true});
   }
   function finish() {
     $('#who-play').hidden = true; $('#who-next').hidden = true; $('#who-skip').hidden = true;
     $('#who-results').hidden = false; $('#who-results').replaceChildren();
+    $('#who-results').setAttribute('tabindex', '-1');
+    $('#who-results').setAttribute('aria-label', 'Resultado da partida');
     $('#who-round').textContent = 'Partida concluída'; $('#who-value').textContent = 'Concluído';
     const hits = results.filter(r => r.correct).length;
     $('#who-feedback').className = 'who-feedback right';
@@ -92,6 +95,7 @@
       const value = document.createElement('strong'); value.textContent = `${result.earned} pts`;
       item.append(name, value); $('#who-results').append(item);
     });
+    $('#who-results').focus({preventScroll: true});
   }
   function start() {
     rounds = shuffle(PUZZLE.words).slice(0, 8); index = 0; score = 0; results = [];
@@ -104,7 +108,10 @@
   $('#who-next').addEventListener('click', () => {
     if (!answered) return;
     if (index === rounds.length - 1) finish();
-    else { index++; showRound(); }
+    else {
+      index++; showRound();
+      $('#who-options').firstElementChild.focus({preventScroll: true});
+    }
   });
   $('#who-restart').addEventListener('click', () => $('#who-reset-dialog').showModal());
   $('#who-reset-cancel').addEventListener('click', () => $('#who-reset-dialog').close());

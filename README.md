@@ -88,3 +88,7 @@ O novo arquivo `quem-sou.js` contém as pistas, sorteio, pontuação e lógica d
 ## Correção — edição pelo teclado virtual do Termo Tech
 
 O teclado virtual agora respeita a posição do cursor no campo da tentativa. Ao selecionar letras, a próxima tecla substitui esse trecho; Apagar remove a seleção ou a letra imediatamente anterior ao cursor. No início do texto, Apagar não remove a última letra. Com o campo cheio, é possível substituir uma seleção sem perder as demais letras. O cursor permanece junto à edição para continuar digitando.
+
+## Correção — foco no jogo Quem sou eu?
+
+Após escolher uma alternativa ou pular a rodada, o foco vai para “Próxima rodada” (ou “Ver resultado” na última rodada). Ao avançar, a primeira alternativa recebe o foco. Ao concluir, o resumo recebe o foco e é identificado como “Resultado da partida”. Assim, a navegação por teclado não fica presa em controles desabilitados ou ocultos. A abertura inicial da página não força o foco para este jogo.
