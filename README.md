@@ -92,3 +92,7 @@ O teclado virtual agora respeita a posição do cursor no campo da tentativa. Ao
 ## Correção — foco no jogo Quem sou eu?
 
 Após escolher uma alternativa ou pular a rodada, o foco vai para “Próxima rodada” (ou “Ver resultado” na última rodada). Ao avançar, a primeira alternativa recebe o foco. Ao concluir, o resumo recebe o foco e é identificado como “Resultado da partida”. Assim, a navegação por teclado não fica presa em controles desabilitados ou ocultos. A abertura inicial da página não força o foco para este jogo.
+
+## Correção — indicador de edição do Termo Tech
+
+O contorno da casa ativa acompanha o cursor no campo da tentativa, inclusive ao clicar, usar as setas ou selecionar um trecho. Uma seleção destaca a casa correspondente ao início do trecho selecionado. O teclado virtual também atualiza o indicador após inserir ou apagar uma letra. Quando o cursor está depois da última casa de uma tentativa completa, a última casa permanece destacada; ao encerrar a rodada, o indicador desaparece.

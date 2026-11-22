@@ -21,6 +21,13 @@
     return result;
   }
   function message(text) { $('#term-status').textContent = text; }
+  function updateCursor() {
+    const input = $('#term-input');
+    const position = Math.min(input.selectionStart ?? draft.length, target.answer.length - 1);
+    $('#term-grid').querySelectorAll('.term-row.current .term-tile').forEach((tile, index) => {
+      tile.classList.toggle('cursor', !ended && index === position);
+    });
+  }
   function render() {
     const grid = $('#term-grid'); grid.replaceChildren();
     for (let row = 0; row < LIMIT; row++) {
@@ -32,7 +39,6 @@
       for (let col = 0; col < target.answer.length; col++) {
         const tile = document.createElement('div'); tile.className = 'term-tile';
         tile.textContent = text[col] || '';
-        if (current && col === Math.min(draft.length, target.answer.length - 1)) tile.classList.add('cursor');
         if (attempt) {
           const state = attempt.states[col]; tile.classList.add(state);
           const symbol = document.createElement('span'); symbol.textContent = symbols[state]; symbol.setAttribute('aria-hidden', 'true'); tile.append(symbol);
@@ -54,6 +60,7 @@
     }
     $('#term-counter').textContent = `${draft.length}/${target.answer.length} letras`;
     $('#term-input').value = draft; $('#term-input').disabled = ended; $('#term-submit').disabled = ended;
+    updateCursor();
   }
   function newRound(nextLevel = level) {
     level = nextLevel; $('#term-level').value = level;
@@ -100,6 +107,7 @@
     render();
     input.focus({preventScroll: true});
     input.setSelectionRange(cursor, cursor);
+    updateCursor();
   }
   ['QWERTYUIOP', 'ASDFGHJKL', ['Enter', ...'ZXCVBNM', '⌫']].forEach(row => {
     const line = document.createElement('div'); line.className = 'term-key-row';
@@ -112,6 +120,9 @@
     $('#term-keyboard').append(line);
   });
   $('#term-input').addEventListener('input', event => { draft = normalize(event.target.value).slice(0, target.answer.length); render(); });
+  for (const event of ['click', 'keyup', 'select', 'focus']) {
+    $('#term-input').addEventListener(event, updateCursor);
+  }
   $('#term-form').addEventListener('submit', event => { event.preventDefault(); submit(); });
   $('#term-hint-button').addEventListener('click', () => { $('#term-hint').hidden = false; $('#term-hint-button').disabled = true; $('#term-hint-button').textContent = 'Dica revelada'; });
   function requestRound(nextLevel) {
