@@ -85,8 +85,21 @@
   function typeKey(letter) {
     if (ended) return;
     if (letter === 'Enter') { submit(); return; }
-    draft = letter === '⌫' ? draft.slice(0, -1) : (draft + letter).slice(0, target.answer.length);
+    const input = $('#term-input');
+    const start = input.selectionStart ?? draft.length;
+    const end = input.selectionEnd ?? start;
+    let cursor = start;
+    if (letter === '⌫') {
+      const from = start === end ? Math.max(0, start - 1) : start;
+      draft = draft.slice(0, from) + draft.slice(end);
+      cursor = from;
+    } else if (draft.length - (end - start) < target.answer.length) {
+      draft = draft.slice(0, start) + letter + draft.slice(end);
+      cursor = start + letter.length;
+    }
     render();
+    input.focus({preventScroll: true});
+    input.setSelectionRange(cursor, cursor);
   }
   ['QWERTYUIOP', 'ASDFGHJKL', ['Enter', ...'ZXCVBNM', '⌫']].forEach(row => {
     const line = document.createElement('div'); line.className = 'term-key-row';

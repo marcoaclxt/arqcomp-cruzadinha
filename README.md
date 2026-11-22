@@ -84,3 +84,7 @@ Há somente uma resposta por rodada. Após responder, o jogo identifica a altern
 Não há cronômetro. “Nova partida” pede confirmação antes de apagar apenas o progresso deste jogo. Alternar as três abas preserva o estado dos jogos enquanto a página estiver aberta; recarregar a página reinicia todos. As pistas deste modo são progressivas e não alteram as pistas da cruzadinha.
 
 O novo arquivo `quem-sou.js` contém as pistas, sorteio, pontuação e lógica do terceiro jogo. A página continua funcionando localmente, sem instalação e sem internet.
+
+## Correção — edição pelo teclado virtual do Termo Tech
+
+O teclado virtual agora respeita a posição do cursor no campo da tentativa. Ao selecionar letras, a próxima tecla substitui esse trecho; Apagar remove a seleção ou a letra imediatamente anterior ao cursor. No início do texto, Apagar não remove a última letra. Com o campo cheio, é possível substituir uma seleção sem perder as demais letras. O cursor permanece junto à edição para continuar digitando.
